@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Acme — Modern Multi‑Section Website</title>
+  <meta name="description" content="A modern responsive single-file HTML template with hero, features, portfolio, blog and contact sections." />
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#7c3aed; --accent-2:#06b6d4; --glass: rgba(255,255,255,0.04);
+      --max-w:1100px; --radius:14px; --gap:24px; --fw-regular:400; --fw-bold:700;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; padding:32px; font-family:var(--sans); background: linear-gradient(180deg,#071029 0%, #031022 100%); color:#e6eef8; -webkit-font-smoothing:antialiased; line-height:1.5;
+    }
+    .container{max-width:var(--max-w); margin:0 auto;}
+
+    /* NAV */
+    header{position:sticky; top:16px; z-index:40}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; background:transparent}
+    .brand{display:flex; gap:12px; align-items:center}
+    .logo{width:46px;height:46px;display:inline-grid;place-items:center;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));font-weight:700}
+    nav ul{list-style:none;display:flex;gap:14px;margin:0;padding:0}
+    nav a{color:var(--muted); text-decoration:none; font-weight:600}
+    nav a:hover{color:#fff}
+    .cta{background:linear-gradient(90deg,var(--accent),#5eead4);color:#021220;padding:10px 14px;border-radius:10px;font-weight:700;text-decoration:none}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;padding:48px 0}
+    .kicker{display:inline-block;padding:6px 10px;background:var(--glass);border-radius:999px;color:var(--muted);font-weight:700}
+    h1{font-size:38px;margin:14px 0 8px}
+    p.lead{color:var(--muted);margin:0 0 18px}
+    .actions{display:flex;gap:12px}
+
+    /* Card */
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:18px;border-radius:var(--radius);box-shadow:0 6px 30px rgba(2,6,23,0.6);}
+    .feature-list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+    .feature{padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);}
+    .feature h4{margin:0 0 8px}
+    .muted{color:var(--muted)}
+
+    /* PORTFOLIO */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .project{border-radius:12px;overflow:hidden; height:160px; background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:12px;color:#fff;font-weight:700}
+
+    /* TESTIMONIALS */
+    .test-row{display:flex;gap:12px}
+    .test{flex:1;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
+
+    /* BLOG */
+    .posts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .post{display:flex;gap:12px;padding:12px;border-radius:12px;background:var(--card);align-items:center}
+    .post img{width:84px;height:64px;object-fit:cover;border-radius:8px}
+
+    /* CONTACT */
+    form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input,textarea,select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    textarea{grid-column:1/-1;min-height:120px}
+    .full-width{grid-column:1/-1}
+
+    /* FOOTER */
+    footer{padding:28px 0 12px;color:var(--muted);font-size:14px}
+
+    /* Utility & Responsive */
+    .stack{display:flex;gap:12px;align-items:center}
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .feature-list{grid-template-columns:repeat(2,1fr)}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .posts{grid-template-columns:1fr}
+      form{grid-template-columns:1fr}
+      nav ul{display:none}
+    }
+    @media (max-width:520px){
+      body{padding:18px}
+      h1{font-size:28px}
+      .grid{grid-template-columns:1fr}
+    }
+
+    /* subtle animation */
+    .fade-up{opacity:0;transform:translateY(8px);transition:all 520ms cubic-bezier(.2,.9,.3,1)}
+    .in-view{opacity:1;transform:none}
+
+    /* small helpers */
+    .tag{padding:6px 8px;background:rgba(255,255,255,0.03);border-radius:8px;font-weight:700;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="logo">AC</div>
+          <div>
+            <div style="font-weight:700">Acme</div>
+            <div style="font-size:12px;color:var(--muted)">Design &amp; Product</div>
+          </div>
+        </div>
+        <nav aria-label="Main Navigation">
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="stack">
+          <a class="tag" href="#pricing">Pricing</a>
+          <a class="cta" href="#contact">Get Started</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <span class="kicker">New — 2025 Collection</span>
+          <h1>Build beautiful, fast websites — without the headache.</h1>
+          <p class="lead">A single-file responsive template with accessible markup, performance-minded CSS, and small JavaScript helpers you can copy into any project.</p>
+          <div class="actions">
+            <a class="cta" href="#contact">Start Free Trial</a>
+            <a style="background:transparent;border-radius:10px;padding:10px 14px;border:1px solid rgba(255,255,255,0.04);text-decoration:none;color:var(--muted);font-weight:700" href="#features">Explore Features</a>
+          </div>
+
+          <div class="card" style="margin-top:22px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-weight:700">Trusted by teams at</div>
+                <div class="muted" style="font-size:13px">Acme, Nova Labs, Bluebird — and hundreds of freelancers</div>
+              </div>
+              <div class="muted">4.9 ★ (1.2k reviews)</div>
+            </div>
+
+            <div class="feature-list" style="margin-top:16px">
+              <div class="feature">
+                <h4>Ultra‑fast</h4>
+                <div class="muted">Tiny CSS, smart images, fast load times.</div>
+              </div>
+              <div class="feature">
+                <h4>Accessible</h4>
+                <div class="muted">Semantic HTML &amp; keyboard‑friendly components.</div>
+              </div>
+              <div class="feature">
+                <h4>Customizable</h4>
+                <div class="muted">Components you can copy and adapt instantly.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card">
+            <h3 style="margin:0 0 8px">Quick demo</h3>
+            <p class="muted" style="margin-bottom:12px">A small interactive preview: choose a layout and see the snippet update.</p>
+            <div style="display:flex;gap:8px;margin-bottom:12px">
+              <button data-layout="grid" class="layout-btn tag">Grid</button>
+              <button data-layout="list" class="layout-btn tag">List</button>
+              <button data-layout="card" class="layout-btn tag">Card</button>
+            </div>
+
+            <div id="preview" style="height:220px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.35));display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700">
+              Preview: grid
+            </div>
+          </div>
+
+          <div style="height:18px"></div>
+          <div class="card">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div>
+                <div style="font-weight:700">Starter</div>
+                <div class="muted">Free — for personal use</div>
+              </div>
+              <div style="font-size:18px;font-weight:700">$0</div>
+            </div>
+            <div style="margin-top:12px" class="muted">Includes basic templates, documentation, and community support.</div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="features" style="margin-top:34px">
+        <h2 style="margin:0 0 12px">Features</h2>
+        <p class="muted" style="margin:0 0 18px">Everything you need to ship a polished website quickly.</p>
+
+        <div class="grid">
+          <div class="card fade-up">
+            <h3>Responsive grid</h3>
+            <p class="muted">A fluid grid that adapts to screen size with sensible defaults.</p>
+          </div>
+          <div class="card fade-up">
+            <h3>Performance-first</h3>
+            <p class="muted">Small CSS footprint and progressive enhancement for JS features.</p>
+          </div>
+          <div class="card fade-up">
+            <h3>Design tokens</h3>
+            <p class="muted">Centralized variables for color, spacing, and type.</p>
